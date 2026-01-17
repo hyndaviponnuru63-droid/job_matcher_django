@@ -1,0 +1,50 @@
+{% extends 'jobs/base.html' %}
+{% block title %}Job Listings{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Job Listings</h2>
+
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-4">
+        <input type="text" name="q" class="form-control" placeholder="Keyword" value="{{ request.GET.q }}">
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="location" class="form-control" placeholder="Location" value="{{ request.GET.location }}">
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="skill" class="form-control" placeholder="Skill" value="{{ request.GET.skill }}">
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100">Search</button>
+    </div>
+</form>
+
+{% if jobs %}
+    <div class="row">
+        {% for job in jobs %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ job.title }}</h5>
+                        <p class="card-text">
+                            <strong>{{ job.company }}</strong><br>
+                            {{ job.location }}<br>
+                            <small>Skills: {{ job.skills }}</small>
+                        </p>
+
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'save_job' job.id %}" class="btn btn-success btn-sm">
+                                Save Job
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-warning">No jobs found</div>
+{% endif %}
+
+{% endblock %}

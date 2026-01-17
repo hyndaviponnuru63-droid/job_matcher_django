@@ -1,0 +1,29 @@
+{% extends 'jobs/base.html' %}
+{% block title %}My Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">My Saved Jobs</h2>
+
+{% if saved_jobs %}
+    <div class="row">
+        {% for item in saved_jobs %}
+            <div class="col-md-6 mb-4">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h5>{{ item.job.title }}</h5>
+                        <p>
+                            {{ item.job.company }}<br>
+                            {{ item.job.location }}<br>
+                            <small>{{ item.job.skills }}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">No saved jobs yet</div>
+{% endif %}
+
+{% endblock %}
