@@ -17,6 +17,12 @@ class SavedJob(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     saved_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.user.username} saved {self.job.title}"
+    class Meta:
+        unique_together = ('user', 'job')
+
+
+class Resume(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    resume_file = models.FileField(upload_to='resumes/')
+    extracted_skills = models.TextField(blank=True)
 

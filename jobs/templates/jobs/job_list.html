@@ -32,11 +32,12 @@
                             {{ job.location }}<br>
                             <small>Skills: {{ job.skills }}</small>
                         </p>
-
+                        <p>Match: {{ job.match }}%</p>
                         {% if user.is_authenticated %}
                             <a href="{% url 'save_job' job.id %}" class="btn btn-success btn-sm">
                                 Save Job
                             </a>
+
                         {% endif %}
                     </div>
                 </div>
