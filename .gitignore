@@ -11,6 +11,7 @@ env/
 # Django
 db.sqlite3
 .env
+static/
 
 # OS
 .DS_Store
